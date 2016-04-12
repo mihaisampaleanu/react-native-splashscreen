@@ -61,6 +61,7 @@ public class RCTSplashScreen extends ReactContextBaseJavaModule {
                         splashDialog.dismiss();
                         splashDialog = null;
                         splashImageView = null;
+                        return;
                     } 
                     
                     AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
