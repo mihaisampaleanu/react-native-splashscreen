@@ -61,26 +61,26 @@ public class RCTSplashScreen extends ReactContextBaseJavaModule {
                         splashDialog.dismiss();
                         splashDialog = null;
                         splashImageView = null;
-                    } else {
-                        AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
-                        fadeOut.setDuration(1000);
-                        View view = ((ViewGroup)splashDialog.getWindow().getDecorView()).getChildAt(0);
-                        view.startAnimation(fadeOut);
-                        fadeOut.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                            }
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                splashDialog.dismiss();
-                                splashDialog = null;
-                                splashImageView = null;
-                            }
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-                            }
-                        });
-                    }
+                    } 
+                    
+                    AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
+                    fadeOut.setDuration(1000);
+                    View view = ((ViewGroup)splashDialog.getWindow().getDecorView()).getChildAt(0);
+                    view.startAnimation(fadeOut);
+                    fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                        }
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            splashDialog.dismiss();
+                            splashDialog = null;
+                            splashImageView = null;
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                        }
+                    });
                 }
             }
         });
