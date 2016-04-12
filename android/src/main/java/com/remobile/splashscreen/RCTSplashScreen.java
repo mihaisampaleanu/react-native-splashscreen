@@ -42,38 +42,45 @@ public class RCTSplashScreen extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void hide() {
+    public void hide(final Boolean animated) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                removeSplashScreen();
+                removeSplashScreen(animated);
             }
         }, 500);
     }
 
 
-    private void removeSplashScreen() {
+    private void removeSplashScreen(final Boolean animated) {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 if (splashDialog != null && splashDialog.isShowing()) {
-                    AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
-                    fadeOut.setDuration(1000);
-                    View view = ((ViewGroup)splashDialog.getWindow().getDecorView()).getChildAt(0);
-                    view.startAnimation(fadeOut);
-                    fadeOut.setAnimationListener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-                        }
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-                            splashDialog.dismiss();
-                            splashDialog = null;
-                            splashImageView = null;
-                        }
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-                        }
-                    });
+
+                    if (!animated) {
+                        splashDialog.dismiss();
+                        splashDialog = null;
+                        splashImageView = null;
+                    } else {
+                        AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
+                        fadeOut.setDuration(1000);
+                        View view = ((ViewGroup)splashDialog.getWindow().getDecorView()).getChildAt(0);
+                        view.startAnimation(fadeOut);
+                        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                            }
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                splashDialog.dismiss();
+                                splashDialog = null;
+                                splashImageView = null;
+                            }
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+                            }
+                        });
+                    }
                 }
             }
         });
